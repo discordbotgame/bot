@@ -8,23 +8,21 @@ client.on('ready', async () => {
 });
 
 client.on('interactionCreate', async interaction => {
+    const row = new MessageActionRow()
+        .addComponents(
+            new MessageButton()
+                .setCustomId('button1')
+                .setLabel('deez')
+                .setStyle('PRIMARY'),
+        );
+
     if (interaction.isCommand() && interaction.commandName === 'ping') {
-		const row = new MessageActionRow()
-			.addComponents(
-				new MessageButton()
-					.setCustomId('primary')
-					.setLabel('Primary')
-					.setStyle('PRIMARY'),
-			);
 		await interaction.reply({ content: 'Pong!', components: [row] });
 	}
-    if (interaction.isButton()) {
-        console.log('test');
-    }
-});
 
-client.on('messageCreate', async (message) => {
-    if (message.author.bot) return;
+    if (interaction.isButton() && interaction.customId === 'button1') {
+        interaction.reply({ content: 'Pong!', ephemeral: true, components: [row] }).catch(console.error);
+    }
 });
 
 client.login(config.bot.token);
