@@ -5,6 +5,6 @@ export default {
         token: process.env.DISCORD_TOKEN,
     },
     client: {
-        ws: { intents: Intents.ALL }
+        intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
     } as ClientOptions
 }

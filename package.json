@@ -10,7 +10,7 @@
         "deploy": "yarn && yarn build && yarn start"
     },
     "dependencies": {
-        "discord.js": "^12.2.0"
+        "discord.js": "13.0.0"
     },
     "devDependencies": {
         "@types/node": "^16.4.10",
