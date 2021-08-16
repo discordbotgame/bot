@@ -11,7 +11,6 @@ client.on('ready', async () => {
 });
 
 client.on('interactionCreate', async interaction => {
-    console.log(interaction);
     if (interaction.isCommand() && interaction.commandName === 'signup') {
 		signupCommand(interaction)
 	}
