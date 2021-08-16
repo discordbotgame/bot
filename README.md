@@ -45,6 +45,7 @@ $ yarn build && yarn start
 ## Running on Docker
 
 ```sh
-$ docker build -t discord-bot .
+$ docker build -t my-bot .
+$ docker run my-bot
 $ docker run -it --rm -e DISCORD_TOKEN="YOUR TOKEN HERE" --name discord-bot discord-bot
 ```

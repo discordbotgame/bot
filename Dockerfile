@@ -1,24 +1,15 @@
-FROM node:lts-alpine AS builder
-WORKDIR /var/bot
+FROM node:16.6.2
 
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile && yarn cache clean
+# Create the directory!
+RUN mkdir -p /usr/src/bot
+WORKDIR /usr/src/bot
 
-COPY . .
+# Copy and Install our bot
+COPY package.json /usr/src/bot
+RUN yarn install
 
-RUN yarn build
+# Our precious bot
+COPY . /usr/src/bot
 
-# RUNNER
-FROM node:lts-alpine AS runner
-WORKDIR /var/bot
-
-COPY package.json yarn.lock ./
-ARG NODE_ENV=production
-RUN yarn install --frozen-lockfile && yarn cache clean
-
-COPY --from=builder /var/bot/dist/ ./
-
-RUN adduser -S bot
-USER bot
-
-ENTRYPOINT [ "node", "index.ts" ]
+# Start me!
+CMD ["yarn", "dev"]
