@@ -1,23 +1,23 @@
-import { Client, MessageButton, MessageActionRow, MessageEmbed, CommandInteraction } from 'discord.js';
+import { Client } from 'discord.js';
 import config from './config';
-import { createMessageButton, createMessageActionRow } from './builders';
+import { signupCommand, signupCommandAccept } from './commands';
+import { loadCommands } from './utils';
 
 const client = new Client(config.client);
 
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user?.tag}!`);
+    loadCommands();
 });
 
 client.on('interactionCreate', async interaction => {
-    const button = createMessageButton('button1', 'deez', 'PRIMARY')
-    const row = createMessageActionRow([button]);
-
-    if (interaction.isCommand() && interaction.commandName === 'ping') {
-		await interaction.reply({ content: 'Pong!', components: [row] });
+    console.log(interaction);
+    if (interaction.isCommand() && interaction.commandName === 'signup') {
+		signupCommand(interaction)
 	}
 
-    if (interaction.isButton() && interaction.customId === 'button1') {
-        interaction.reply({ content: 'Pong!', ephemeral: true, components: [row] }).catch(console.error);
+    if (interaction.isButton() && interaction.customId === 'signupCommand') {
+        signupCommandAccept(interaction);
     }
 });
 
