@@ -1,8 +1,9 @@
 import { ButtonInteraction, CommandInteraction } from 'discord.js';
 import { createMessageButton, createMessageActionRow } from '../../builders';
+import config from '../../config';
 
 const signupCommand = (interaction: CommandInteraction) => {
-    const button = createMessageButton('signupCommand', 'accept', 'PRIMARY')
+    const button = createMessageButton(config.interactions.buttons.signupAccept.id, 'accept', 'PRIMARY')
     const row = createMessageActionRow([button]);
     interaction.reply({ content: 'Create an account', ephemeral: true, components: [row] }).catch(console.error);
 }

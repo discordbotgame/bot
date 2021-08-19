@@ -15,7 +15,7 @@ const loadCommands = () => {
             console.log('Started refreshing application (/) commands.');
 
             await rest.put(
-                Routes.applicationCommands(config.bot.id),
+                Routes.applicationGuildCommands(config.bot.clientId, config.bot.guildId),
                 { body: commands },
             );
 

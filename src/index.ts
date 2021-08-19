@@ -11,13 +11,17 @@ client.on('ready', async () => {
 });
 
 client.on('interactionCreate', async interaction => {
-    if (interaction.isCommand() && interaction.commandName === 'signup') {
+    if (interaction.isCommand() && interaction.commandName === config.commands.signup.name) {
 		signupCommand(interaction)
 	}
 
-    if (interaction.isButton() && interaction.customId === 'signupCommand') {
+    if (interaction.isButton() && interaction.customId === config.interactions.buttons.signupAccept.id) {
         signupCommandAccept(interaction);
     }
+});
+
+client.on('messageCreate', async message => {
+    console.log(message.content);
 });
 
 client.login(config.bot.token);

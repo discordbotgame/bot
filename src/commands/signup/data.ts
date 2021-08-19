@@ -1,7 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+import config from '../../config';
 
 const signupCommandData = new SlashCommandBuilder()
-	.setName('signup')
+	.setName(config.commands.signup.name)
 	.setDescription('Command for creating an account!')
 
 export { signupCommandData };
